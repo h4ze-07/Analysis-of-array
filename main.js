@@ -57,20 +57,23 @@ let users = [
 
 // Дано масив об’єктів. Вивести масив телефонних номерів користувачів в яких баланс більше ніж 2000 доларів. І знайти суму всіх балансів користувачів.
 
-let phoneNumbers = [];
-let usersBalances = 0;
+let phonesArr = [];
+let usersBalance = 0;
 
-for (let i = 0; i < users.length; i++) { 
-    let balance = Number(users[i].balance.replace(/[$,]/g, ''));
-    users[i].balance = balance;
+users = users.map((item) => {
+    return {
+        ...item,
+        balance: Number(item.balance.replace(/[$,]/g, ''))
+    };
+});
+console.log(users);
 
+for (let i = 0; i < users.length; i++) {
     if (users[i].balance > 2000) {
-        phoneNumbers.push(users[i].phone);
+        phonesArr.push(users[i].phone);
     }
+    usersBalance += users[i].balance;
+};
 
-    usersBalances += balance;
-}
-
-console.log('Масив телефонних номерів користувачів в яких баланс більше ніж 2000 доларів:', phoneNumbers);
-console.log('Сума всіх балансів користувачів:', usersBalances);
-
+console.log('Масив телефонних номерів користувачів в яких баланс більше ніж 2000 доларів:', phonesArr);
+console.log('Сума всіх балансів користувачів:', usersBalance);
